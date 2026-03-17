@@ -183,6 +183,52 @@
         </div>
     </section>
 
+    <section class="oauth-section" id="oauth" style="padding: 120px 20px; background: var(--bg-secondary);">
+        <h2 class="section-title">OAuth 认证</h2>
+        <p class="section-subtitle">安全的模型认证</p>
+        <div style="max-width: 900px; margin: 0 auto; text-align: left;">
+            <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8;">OpenClaw 支持通过 OAuth 进行「订阅认证」，适用于提供 OAuth 服务的提供商（特别是 <strong>OpenAI Codex (ChatGPT OAuth)</strong>）。</p>
+            
+            <div class="highlights" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="highlight-item">
+                    <h3>🔐 OAuth 令牌交换</h3>
+                    <p>支持 PKCE 安全流程，自动处理令牌刷新，无需手动管理</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>📁 多账户支持</h3>
+                    <p>通过 auth-profiles.json 支持多个账户，可按会话路由到不同配置文件</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>🔑 密钥安全存储</h3>
+                    <p>按代理存储认证信息，支持 API 密钥和 OAuth 令牌</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>⚡ 自动刷新</h3>
+                    <p>令牌自动刷新，运行时自动处理过期时间</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 48px;">
+                <h3 style="font-size: 24px; margin-bottom: 20px;">支持的认证方式</h3>
+                <div class="code-block" style="margin-bottom: 20px;">
+<pre><span class="comment"># OpenAI Codex OAuth 登录</span>
+openclaw models auth login --provider openai-codex
+
+<span class="comment"># Anthropic 设置令牌（订阅认证）</span>
+openclaw models auth setup-token --provider anthropic
+
+<span class="comment"># 查看认证状态</span>
+openclaw models status</pre>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; padding: 24px; background: var(--bg-tertiary); border-radius: 16px; border-left: 4px solid #f59e0b;">
+                <p style="font-size: 14px; color: #f59e0b; margin-bottom: 8px;">⚠️ 注意</p>
+                <p style="font-size: 14px; color: var(--text-secondary);">Anthropic 的设置令牌支持仅指技术兼容性，请自行查看 Anthropic 当前的条款。对于生产环境，API 密钥认证比订阅设置令牌认证更安全。</p>
+            </div>
+        </div>
+    </section>
+
     <div class="principle-link">
         <a href="principle.html">📖 了解更多工作原理 →</a>
     </div>
