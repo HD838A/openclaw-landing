@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/openclaw-landing/">
+    <title>OpenClaw — 你的AI助手，运行在本地</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1d1d1f;
+            --bg-tertiary: #2a2a2c;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #2997ff;
+            --gradient: linear-gradient(135deg, #5e17eb 0%, #8b5cf6 100%);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        a:focus { outline: none; }
+        nav {
+            position: fixed; top: 0; width: 100%; height: 48px;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+            z-index: 1000; display: flex; justify-content: center; align-items: center;
+        }
+        nav ul { display: flex; list-style: none; gap: 28px; }
+        nav a { color: #d6d6d6; font-size: 12px; transition: color 0.3s; }
+        nav a:hover { color: #fff; }
+        
+        .hero {
+            min-height: 90vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding-top: 80px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+            pointer-events: none; animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 0.6; } }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: 80px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #a8a8a8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero .tagline { font-size: 28px; color: var(--text-secondary); margin-bottom: 40px; animation: fadeInUp 1s ease-out 0.2s both; }
+        .hero .description { font-size: 21px; color: var(--text-secondary); max-width: 700px; margin-bottom: 48px; animation: fadeInUp 1s ease-out 0.4s both; }
+        .hero .quote { font-size: 24px; font-style: italic; color: var(--text-secondary); margin-bottom: 48px; animation: fadeInUp 1s ease-out 0.6s both; }
+        
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; animation: fadeInUp 1s ease-out 0.8s both; }
+        .btn {
+            padding: 18px 32px; border-radius: 980px; font-size: 17px; font-weight: 500;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before { left: 100%; }
+        .btn-primary { background: var(--accent); color: #fff !important; }
+        .btn-primary:hover { background: #0071e3; transform: scale(1.05); box-shadow: 0 10px 40px rgba(41,151,255,0.3); }
+        .btn-secondary { background: transparent; color: var(--accent) !important; }
+        .btn-secondary:hover { background: rgba(41,151,255,0.2); transform: scale(1.05); box-shadow: 0 10px 40px rgba(41,151,255,0.2); }
+        
+        .what-is, .capabilities, .quickstart { padding: 120px 20px; }
+        .what-is { text-align: center; }
+        .what-is h2 { font-size: 48px; margin-bottom: 24px; }
+        .what-is p { font-size: 20px; color: var(--text-secondary); max-width: 700px; margin: 0 auto 24px; line-height: 1.8; }
+        .what-is strong { color: var(--text-primary); }
+        
+        .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 48px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .highlight-item { background: var(--bg-tertiary); border-radius: 16px; padding: 28px; transition: all 0.3s ease; }
+        .highlight-item:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(99,102,241,0.15); }
+        .highlight-item h3 { font-size: 18px; margin-bottom: 8px; color: var(--accent); }
+        .highlight-item p { font-size: 14px; margin: 0; }
+        
+        .capabilities, .quickstart { background: var(--bg-secondary); }
+        .section-title { font-size: 56px; font-weight: 700; text-align: center; margin-bottom: 16px; }
+        .section-subtitle { font-size: 28px; color: var(--text-secondary); text-align: center; margin-bottom: 60px; }
+        
+        .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+        .feature-card {
+            background: #2a2a2c; border-radius: 20px; padding: 40px 32px;
+            transition: all 0.3s ease; cursor: pointer; display: block;
+        }
+        .feature-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 60px rgba(99,102,241,0.25); }
+        .feature-icon { width: 64px; height: 64px; margin-bottom: 20px; background: var(--gradient); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+        .feature-card h3 { font-size: 22px; margin-bottom: 10px; }
+        .feature-card p { color: var(--text-secondary); font-size: 15px; }
+        
+        .steps { max-width: 800px; margin: 0 auto; }
+        .step { display: flex; gap: 24px; margin-bottom: 40px; }
+        .step-number { width: 48px; height: 48px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { font-size: 22px; margin-bottom: 8px; }
+        .step-content p { color: var(--text-secondary); margin-bottom: 12px; }
+        .code-block { background: #1e1e1e; border-radius: 12px; padding: 20px; text-align: left; overflow-x: auto; }
+        .code-block pre { font-family: "SF Mono", Monaco, monospace; font-size: 14px; line-height: 1.6; color: #d4d4d4; }
+        .code-block .comment { color: #6a9955; }
+        
+        .principle-link, .docs-link { text-align: center; margin-top: 40px; }
+        .principle-link a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--bg-tertiary); color: var(--text-primary); border-radius: 980px; font-size: 15px; transition: all 0.3s; }
+        .principle-link a:hover { background: var(--accent); transform: scale(1.05); }
+        .docs-link a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--accent); color: #fff; border-radius: 980px; font-size: 15px; font-weight: 500; transition: all 0.3s; }
+        .docs-link a:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(41,151,255,0.4); }
+        
+        .cta-section { padding: 160px 20px; text-align: center; }
+        .cta-section h2 { font-size: 56px; font-weight: 700; margin-bottom: 24px; }
+        .cta-section p { font-size: 21px; color: var(--text-secondary); margin-bottom: 40px; }
+        
+        footer { padding: 40px 20px; background: var(--bg-secondary); text-align: center; }
+        footer p { font-size: 12px; color: var(--text-secondary); }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .hero .tagline { font-size: 20px; }
+            .hero .description { font-size: 17px; }
+            .section-title { font-size: 36px; }
+            .cta-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"> OpenClaw</a></li>
+            <li><a href="index.html#what-is">是什么</a></li>
+            <li><a href="features.html">功能</a></li>
+            <li><a href="principle.html">原理</a></li>
+            <li><a href="index.html#quickstart">开始</a></li>
+            <li><a href="docs.html">文档</a></li>
+            <li><a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>OpenClaw</h1>
+        <p class="tagline">你的AI助手，运行在本地</p>
+        <p class="description">自托管网关，连接 WhatsApp、Telegram、Discord、iMessage 等通讯应用与 AI 助手。一个网关，多种渠道，随时随地与 AI 对话。</p>
+        <p class="quote">"EXFOLIATE! EXFOLIATE!" — 一只太空龙虾如是说</p>
+        <div class="cta-buttons">
+            <a href="index.html#quickstart" class="btn btn-primary">快速开始</a>
+            <a href="principle.html" class="btn btn-secondary">了解更多</a>
+        </div>
+    </section>
+
+    <section class="what-is" id="what-is">
+        <h2>什么是 OpenClaw？</h2>
+        <p>OpenClaw 是一个<strong>自托管网关</strong>，它连接你喜欢的聊天应用 —— WhatsApp、Telegram、Discord、iMessage 等 —— 与 AI 编程助手。你只需在自己的电脑（或服务器）上运行一个 Gateway 进程，它就成为你的消息应用与随时可用的 AI 助手之间的桥梁。</p>
+        <p><strong>它适合谁？</strong>想要拥有私人 AI 助手、但又不想放弃数据控制权或依赖托管服务的开发者与高级用户。</p>
+        <div class="highlights">
+            <div class="highlight-item"><h3>🤖 自托管</h3><p>运行在你的设备上，你的数据你做主</p></div>
+            <div class="highlight-item"><h3>🔗 多渠道</h3><p>一个 Gateway 同时服务 WhatsApp、Telegram、Discord 等</p></div>
+            <div class="highlight-item"><h3>🧠 原生 Agent</h3><p>专为 AI 编程助手设计，支持工具调用、会话管理、记忆系统</p></div>
+            <div class="highlight-item"><h3>📂 开源</h3><p>MIT 许可证，社区驱动</p></div>
+        </div>
+    </section>
+
+    <section class="capabilities" id="capabilities">
+        <h2 class="section-title">核心功能</h2>
+        <p class="section-subtitle">一切为你打造</p>
+        <div class="cap-grid">
+            <a href="features.html" class="feature-card"><div class="feature-icon">💬</div><h3>多渠道网关</h3><p>WhatsApp、Telegram、Discord、iMessage，一个 Gateway 进程同时连接</p></a>
+            <a href="features.html" class="feature-card"><div class="feature-icon">🔌</div><h3>插件渠道</h3><p>通过扩展包添加 Mattermost 等更多渠道</p></a>
+            <a href="features.html" class="feature-card"><div class="feature-icon">👥</div><h3>多 Agent 路由</h3><p>每个 Agent、工作区或发送者都有独立的隔离会话</p></a>
+            <a href="features.html" class="feature-card"><div class="feature-icon">🖼️</div><h3>媒体支持</h3><p>发送和接收图片、音频、文档</p></a>
+            <a href="features.html" class="feature-card"><div class="feature-icon">🌐</div><h3>网页控制台</h3><p>浏览器仪表板，用于聊天、配置、会话管理</p></a>
+            <a href="features.html" class="feature-card"><div class="feature-icon">📱</div><h3>移动节点</h3><p>配对 iOS 和 Android 设备，支持 Canvas、相机、语音工作流</p></a>
+        </div>
+    </section>
+
+    <div class="principle-link">
+        <a href="principle.html">📖 了解更多工作原理 →</a>
+    </div>
+
+    <section class="quickstart" id="quickstart">
+        <h2 class="section-title">快速开始</h2>
+        <p class="section-subtitle">5 分钟内启动</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content"><h3>安装 OpenClaw</h3><p>使用 npm 全局安装</p><div class="code-block"><pre>npm install -g openclaw@latest</pre></div></div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content"><h3>初始化并安装服务</h3><p>运行引导程序并安装守护进程</p><div class="code-block"><pre>openclaw onboard --install-daemon</pre></div></div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content"><h3>登录渠道并启动 Gateway</h3><p>选择你想使用的通讯渠道</p><div class="code-block"><pre><span class="comment"># 登录渠道</span>
+openclaw channels login
+<span class="comment"># 启动 Gateway</span>
+openclaw gateway --port 18789</pre></div></div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content"><h3>打开控制台</h3><p>在浏览器中打开控制 UI 开始使用</p><div class="code-block"><pre>http://127.0.0.1:18789/</pre></div></div>
+            </div>
+        </div>
+        <div class="docs-link"><a href="docs.html">📚 查看完整文档 →</a></div>
+    </section>
+
+    <section class="cta-section">
+        <h2>准备好体验了吗？</h2>
+        <p>加入 OpenClaw 社区，发现更多可能</p>
+        <div class="cta-buttons">
+            <a href="https://github.com/openclaw/openclaw" class="btn btn-primary" target="_blank">GitHub</a>
+            <a href="https://discord.com/invite/clawd" class="btn btn-secondary" target="_blank">Discord</a>
+        </div>
+    </section>
+
+    <footer><p>© 2024 OpenClaw. Built with ❤️ for AI enthusiasts.</p></footer>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <base href="/openclaw-landing/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/openclaw-landing/">
+    <title>文档 — OpenClaw</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1d1d1f;
+            --bg-tertiary: #2a2a2c;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #2997ff;
+            --gradient: linear-gradient(135deg, #5e17eb 0%, #8b5cf6 100%);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: #d6d6d6; text-decoration: none; font-size: 12px; }
+        nav a:hover { color: #fff; }
+        
+        .hero {
+            padding: 100px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 120px;
+        }
+        
+        .section { margin-bottom: 48px; }
+        
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #3d3d3f;
+        }
+        
+        .section h3 {
+            font-size: 20px;
+            margin: 24px 0 12px;
+            color: var(--text-primary);
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+        
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #569cd6; }
+        
+        .step {
+            display: flex;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        
+        .step-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .note {
+            background: rgba(41, 151, 255, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+        }
+        
+        .note p { color: var(--text-primary); margin: 0; }
+        
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .req-item {
+            background: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .req-item .icon { font-size: 32px; margin-bottom: 8px; }
+        .req-item p { font-size: 14px; margin: 0; }
+        
+        .back-link {
+            display: inline-block;
+            padding: 12px 24px;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            padding: 40px 20px;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+        footer p { font-size: 12px; color: var(--text-secondary); }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"> OpenClaw</a></li>
+            <li><a href="index.html#capabilities">功能</a></li>
+            <li><a href="principle.html">原理</a></li>
+            <li><a href="#quickstart">开始</a></li>
+            <li><a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+    
+    <div class="hero">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <h1>📚 文档</h1>
+        <p>快速上手 OpenClaw，打造你的私人AI助手</p>
+    </div>
+    
+    <div class="content" id="quickstart">
+        <div class="section">
+            <h2>🚀 快速开始</h2>
+            <p>在 5 分钟内启动 OpenClaw 开始使用。</p>
+            
+            <h3>前置要求</h3>
+            <div class="requirements">
+                <div class="req-item">
+                    <div class="icon">📦</div>
+                    <p>Node.js 22+</p>
+                </div>
+                <div class="req-item">
+                    <div class="icon">🔑</div>
+                    <p>AI 模型 API Key</p>
+                </div>
+                <div class="req-item">
+                    <div class="icon">⏱️</div>
+                    <p>5 分钟时间</p>
+                </div>
+            </div>
+            
+            <h3>步骤 1：安装 OpenClaw</h3>
+            <div class="code-block">
+                <pre>npm install -g openclaw@latest</pre>
+            </div>
+            
+            <h3>步骤 2：初始化并安装服务</h3>
+            <p>运行引导程序，按照提示完成配置，并安装守护进程</p>
+            <div class="code-block">
+                <pre>openclaw onboard --install-daemon</pre>
+            </div>
+            
+            <h3>步骤 3：登录通讯渠道</h3>
+            <p>选择你想使用的通讯渠道（WhatsApp、Telegram、Discord 等）</p>
+            <div class="code-block">
+                <pre>openclaw channels login</pre>
+            </div>
+            
+            <h3>步骤 4：启动 Gateway</h3>
+            <div class="code-block">
+                <pre>openclaw gateway --port 18789</pre>
+            </div>
+            
+            <h3>步骤 5：打开控制台</h3>
+            <p>在浏览器中打开控制 UI 开始使用</p>
+            <div class="code-block">
+                <pre>http://127.0.0.1:18789/</pre>
+            </div>
+            
+            <div class="note">
+                <p>💡 提示：可以使用 <code>openclaw start</code> 命令一键启动所有服务</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>⚙️ 配置说明</h2>
+            
+            <h3>配置文件位置</h3>
+            <p>配置文件位于 <code>~/.openclaw/openclaw.json</code></p>
+            
+            <h3>基本配置示例</h3>
+            <div class="code-block">
+                <pre>{
+  "channels": {
+    "whatsapp": {
+      "allowFrom": ["+15555550123"]
+    }
+  },
+  "messages": {
+    "groupChat": {
+      "mentionPatterns": ["@openclaw"]
+    }
+  }
+}</pre>
+            </div>
+            
+            <h3>安全设置</h3>
+            <p>默认配置下任何人都可以访问，建议配置白名单：</p>
+            <ul style="color: var(--text-secondary); margin-left: 20px; margin-top: 12px;">
+                <li>channels.whatsapp.allowFrom - 允许的白名单号码</li>
+                <li>groups.requireMention - 群组中是否需要 @提及</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📱 渠道配置</h2>
+            
+            <h3>Telegram Bot</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>创建 Bot</h4>
+                    <p>在 Telegram 搜索 @BotFather，发送 /newbot 创建</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>获取 Token</h4>
+                    <p>BotFather 会返回 bot token</p>
+                </div>
+            </div>
+            
+            <h3>WhatsApp</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>运行登录命令</h4>
+                    <p>openclaw channels login</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>扫码登录</h4>
+                    <p>按照终端提示完成 QR 码扫描</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>💻 常用命令</h2>
+            
+            <div class="code-block">
+                <pre><span class="comment"># 启动服务</span>
+openclaw start
+
+<span class="comment"># 停止服务</span>
+openclaw stop
+
+<span class="comment"># 重启服务</span>
+openclaw restart
+
+<span class="comment"># 查看状态</span>
+openclaw status
+
+<span class="comment"># 查看日志</span>
+openclaw logs
+
+<span class="comment"># 登录渠道</span>
+openclaw channels login
+
+<span class="comment"># 打开控制台</span>
+openclaw web</pre>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🆘 获取帮助</h2>
+            <p>如果遇到问题，可以：</p>
+            <ul style="color: var(--text-secondary); margin-left: 20px; margin-top: 12px;">
+                <li>📖 查看 <a href="https://docs.openclaw.ai" style="color: var(--accent);">完整文档</a></li>
+                <li>💬 加入 <a href="https://discord.com/invite/clawd" style="color: var(--accent);">Discord 社区</a></li>
+                <li>🐙 在 <a href="https://github.com/openclaw/openclaw/issues" style="color: var(--accent);">GitHub 提交 Issue</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 OpenClaw. Built with ❤️ for AI enthusiasts.</p>
+    </footer>
+</body>
+</html>

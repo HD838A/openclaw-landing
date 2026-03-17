@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <base href="/openclaw-landing/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/openclaw-landing/">
+    <title>功能介绍 — OpenClaw</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1d1d1f;
+            --bg-tertiary: #2a2a2c;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #2997ff;
+            --gradient: linear-gradient(135deg, #5e17eb 0%, #8b5cf6 100%);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: #d6d6d6; text-decoration: none; font-size: 12px; }
+        nav a:hover { color: #fff; }
+        
+        .header {
+            padding: 100px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        .header h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .header p {
+            font-size: 21px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-list {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 120px;
+        }
+        
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding: 60px 0;
+            border-bottom: 1px solid #3d3d3f;
+        }
+        
+        .feature-item:last-child { border-bottom: none; }
+        
+        .feature-item:nth-child(even) { direction: rtl; }
+        .feature-item:nth-child(even) > * { direction: ltr; }
+        
+        .feature-content h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .feature-content .icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-content ul {
+            list-style: none;
+        }
+        
+        .feature-content li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-content li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .feature-image {
+            background: var(--bg-tertiary);
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            padding: 12px 24px;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            padding: 40px 20px;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+        footer p { font-size: 12px; color: var(--text-secondary); }
+        
+        @media (max-width: 768px) {
+            .feature-item { grid-template-columns: 1fr; gap: 30px; }
+            .feature-item:nth-child(even) { direction: ltr; }
+            .header h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html"> OpenClaw</a></li>
+            <li><a href="index.html#capabilities">功能</a></li>
+            <li><a href="principle.html">原理</a></li>
+            <li><a href="docs.html">文档</a></li>
+            <li><a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+    
+    <div class="header">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <h1>功能介绍</h1>
+        <p>了解 OpenClaw 如何帮你打造私人AI助手</p>
+    </div>
+    
+    <div class="features-list">
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">💬</span> 多渠道网关</h2>
+                <p>一个 Gateway 进程同时连接多种通讯渠道，AI 随时随地为你服务</p>
+                <ul>
+                    <li>WhatsApp - 全球最流行的通讯应用</li>
+                    <li>Telegram - 功能丰富的即时通讯</li>
+                    <li>Discord - 社区和团队协作</li>
+                    <li>iMessage - Apple 生态即时通讯</li>
+                    <li>Signal - 注重隐私的安全通讯</li>
+                    <li>Slack - 企业团队沟通</li>
+                </ul>
+            </div>
+            <div class="feature-image">🌐</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">🔌</span> 插件系统</h2>
+                <p>通过扩展包添加更多渠道和功能</p>
+                <ul>
+                    <li>Mattermost 支持</li>
+                    <li>飞书支持</li>
+                    <li>QQ 支持</li>
+                    <li>自定义插件开发</li>
+                    <li>Web API 接口</li>
+                </ul>
+            </div>
+            <div class="feature-image">🔧</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">👥</span> 多 Agent 路由</h2>
+                <p>灵活的会话管理，支持多用户多场景</p>
+                <ul>
+                    <li>每个发送者独立会话</li>
+                    <li>工作区隔离</li>
+                    <li>Agent 隔离</li>
+                    <li>会话持久化</li>
+                    <li>会话历史检索</li>
+                </ul>
+            </div>
+            <div class="feature-image">🧠</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">🖼️</span> 媒体支持</h2>
+                <p>完整的富媒体消息支持</p>
+                <ul>
+                    <li>图片发送与接收</li>
+                    <li>语音消息</li>
+                    <li>视频消息</li>
+                    <li>文件传输</li>
+                    <li>URL 预览</li>
+                </ul>
+            </div>
+            <div class="feature-image">📷</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">🌐</span> 网页控制台</h2>
+                <p>强大的浏览器管理界面</p>
+                <ul>
+                    <li>实时聊天界面</li>
+                    <li>配置管理</li>
+                    <li>会话监控</li>
+                    <li>日志查看</li>
+                    <li>设备节点管理</li>
+                </ul>
+            </div>
+            <div class="feature-image">💻</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">📱</span> 移动节点</h2>
+                <p>配对你的手机，获取更多能力</p>
+                <ul>
+                    <li>iOS 设备配对</li>
+                    <li>Android 设备配对</li>
+                    <li>相机拍照/录像</li>
+                    <li>屏幕截图</li>
+                    <li>Canvas 共享</li>
+                    <li>语音输入</li>
+                </ul>
+            </div>
+            <div class="feature-image">📲</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">🤖</span> AI 模型支持</h2>
+                <p>兼容各大主流 AI 模型</p>
+                <ul>
+                    <li>OpenAI GPT-4o</li>
+                    <li>Anthropic Claude</li>
+                    <li>Google Gemini</li>
+                    <li>Pi (Inflection AI)</li>
+                    <li>MiniMax / 智谱 / 月之暗面</li>
+                    <li>Ollama 本地模型</li>
+                </ul>
+            </div>
+            <div class="feature-image">⚡</div>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-content">
+                <h2><span class="icon">🔒</span> 安全可控</h2>
+                <p>数据本地存储，隐私安全</p>
+                <ul>
+                    <li>100% 本地部署</li>
+                    <li>API 密钥加密存储</li>
+                    <li>白名单控制</li>
+                    <li>群组@提及规则</li>
+                    <li>MIT 开源许可</li>
+                </ul>
+            </div>
+            <div class="feature-image">🏠</div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 OpenClaw. Built with ❤️ for AI enthusiasts.</p>
+    </footer>
+</body>
+</html>
